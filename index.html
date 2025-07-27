@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danana's Burger Bar - Where Every Bala Comes with a Side of Belonging</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'forest': '#0E3B3B',
+                        'forest-light': '#1A4D4D',
+                        'gold': '#D4AF37',
+                        'gold-light': '#E6C757',
+                        'gold-dark': '#B8941F'
+                    },
+                    fontFamily: {
+                        'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            cursor: none;
+        }
+        
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: #D4AF37;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+        
+        .custom-cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: #D4AF37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(135deg, #0E3B3B 0%, #1A4D4D 30%, #0E3B3B 70%, #0A2F2F 100%);
+            position: relative;
+        }
+        
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 30% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 10px,
+                    rgba(0, 0, 0, 0.25) 10px,
+                    rgba(0, 0, 0, 0.25) 11px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(0, 0, 0, 0.15) 20px,
+                    rgba(0, 0, 0, 0.15) 21px
+                );
+            pointer-events: none;
+        }
+        
+        .gold-text-brush {
+            background: linear-gradient(45deg, #D4AF37, #E6C757, #D4AF37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        }
+        
+        .gold-text-brush-premium {
+            background: linear-gradient(45deg, #D4AF37, #E6C757, #D4AF37, #B8941F);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            position: relative;
+        }
+        
+        .polaroid {
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .polaroid:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            z-index: 20;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 0 30px rgba(212, 175, 55, 0.4);
+        }
+        
+        .polaroid-photo {
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .polaroid-photo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .polaroid:hover .polaroid-photo::before {
+            left: 100%;
+        }
+        
+
+        
+        .spotify-wheel {
+            width: 220px;
+            height: 220px;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .vinyl-record {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            animation: spin 12s linear infinite;
+            cursor: pointer;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
+        }
+        
+        .vinyl-outer {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, #2a2a2a, #1a1a1a, #0a0a0a);
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: 
+                0 0 0 2px #333, 
+                0 0 0 4px #1a1a1a, 
+                0 0 0 6px #333,
+                inset 0 0 30px rgba(0,0,0,0.8),
+                0 15px 30px rgba(0,0,0,0.3);
+        }
+        
+        .vinyl-grooves {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            background: repeating-conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(255,255,255,0.02) 1deg,
+                transparent 2deg
+            );
+        }
+        
+        .vinyl-inner {
+            width: 75%;
+            height: 75%;
+            background: radial-gradient(circle at 40% 40%, #1a1a1a, #0a0a0a);
+            border-radius: 50%;
+            position: absolute;
+            top: 12.5%;
+            left: 12.5%;
+            box-shadow: 
+                inset 0 0 20px rgba(0,0,0,0.9),
+                inset 0 0 5px rgba(255,255,255,0.1);
+        }
+        
+        .vinyl-center {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #E6C757, #D4AF37, #B8941F);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 3px 10px rgba(0,0,0,0.4),
+                inset 0 1px 3px rgba(255,255,255,0.3),
+                inset 0 -1px 3px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+        
+        .center-hole {
+            width: 6px;
+            height: 6px;
+            background: #0a0a0a;
+            border-radius: 50%;
+            position: absolute;
+            box-shadow: inset 0 0 3px rgba(0,0,0,0.8);
+        }
+        
+        .center-text {
+            position: absolute;
+            text-align: center;
+            top: -20px;
+            font-size: 10px;
+            letter-spacing: 0.5px;
+        }
+        
+        .spotify-logo {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 25px;
+            height: 25px;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .text-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .text-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .menu-item {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .menu-item:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 50px rgba(14, 59, 59, 0.2), 
+                        0 0 30px rgba(212, 175, 55, 0.3),
+                        0 5px 15px rgba(0, 0, 0, 0.1);
+            border-color: #D4AF37;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.9));
+        }
+        
+        .story-text {
+            line-height: 1.8;
+            font-size: 1.125rem;
+        }
+        
+        .story-quote {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.5rem;
+            color: #D4AF37;
+            position: relative;
+        }
+        
+        .story-quote::before,
+        .story-quote::after {
+            content: '"';
+            font-size: 3rem;
+            color: rgba(212, 175, 55, 0.3);
+            position: absolute;
+        }
+        
+        .story-quote::before {
+            top: -10px;
+            left: -20px;
+        }
+        
+        .story-quote::after {
+            bottom: -30px;
+            right: -10px;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #D4AF37;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+            left: 0;
+        }
+        
+        .section-fade {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s ease;
+        }
+        
+        .section-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .burger-loader {
+            width: 60px;
+            height: 60px;
+            position: relative;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .premium-badge {
+            background: linear-gradient(45deg, #D4AF37, #E6C757);
+            color: #0E3B3B;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .popular-badge {
+            background: linear-gradient(45deg, #0E3B3B, #1A4D4D);
+            color: #D4AF37;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox.active {
+            display: flex;
+        }
+        
+        .lightbox-content {
+            max-width: 80%;
+            max-height: 80%;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .interactive-map {
+            background: linear-gradient(135deg, #0E3B3B, #1A4D4D);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .map-pin {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #D4AF37;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+        
+        .map-pin:hover {
+            transform: scale(1.5);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(212, 175, 55, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
+        }
+        
+        .product-card {
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0E3B3B;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="bg-white font-sans">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="text-center">
+            <div class="burger-loader mb-4">
+                <div class="w-full h-full bg-gold rounded-full flex items-center justify-center text-2xl">🍔</div>
+            </div>
+            <p class="text-gold font-serif text-xl">Preparing your Bala...</p>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="customCursor"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-forest/95 backdrop-blur-sm z-50 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-gold font-serif flex items-center gap-3">
+                        Danana's
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-white hover:text-gold font-medium active">Home</a>
+                        <a href="#menu" class="nav-link text-white hover:text-gold font-medium">Our Menu</a>
+                        <a href="#story" class="nav-link text-white hover:text-gold font-medium">Our Story</a>
+                        <a href="#catering" class="nav-link text-white hover:text-gold font-medium">Catering</a>
+                        <a href="#updates" class="nav-link text-white hover:text-gold font-medium">Pop-up Updates</a>
+                        <a href="#merch" class="nav-link text-white hover:text-gold font-medium">Merch</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-gold">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-forest">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block px-3 py-2 text-white hover:text-gold">Home</a>
+                <a href="#menu" class="block px-3 py-2 text-white hover:text-gold">Our Menu</a>
+                <a href="#story" class="block px-3 py-2 text-white hover:text-gold">Our Story</a>
+                <a href="#catering" class="block px-3 py-2 text-white hover:text-gold">Catering</a>
+                <a href="#updates" class="block px-3 py-2 text-white hover:text-gold">Pop-up Updates</a>
+                <a href="#merch" class="block px-3 py-2 text-white hover:text-gold">Merch</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen hero-bg relative overflow-hidden flex items-center justify-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- Main Title - Above the wheel -->
+            <div class="text-reveal mb-8 mt-24">
+                <h1 class="font-serif font-black text-4xl md:text-6xl lg:text-8xl leading-tight text-gold mb-4 drop-shadow-2xl">
+                    DANANA'S<br>
+                    BURGER BAR
+                </h1>
+            </div>
+            
+            <!-- Spotify Wheel with Polaroids -->
+            <div class="relative mb-12 flex items-center justify-center">
+                <!-- Spotify Vinyl Wheel -->
+                <div class="spotify-wheel relative">
+                    <div class="vinyl-record">
+                        <!-- Outer ring -->
+                        <div class="vinyl-outer">
+                            <div class="vinyl-grooves"></div>
+                        </div>
+                        <!-- Inner black disc -->
+                        <div class="vinyl-inner"></div>
+                        <!-- Center label -->
+                        <div class="vinyl-center">
+                            <div class="center-hole"></div>
+                        </div>
+                        <!-- Spotify logo placeholder -->
+                        <div class="spotify-logo">
+                            <span class="text-green-500 text-lg">♪</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Polaroid Photos - Left Side -->
+                <div class="absolute polaroid" style="top: -40px; left: -200px; transform: rotate(-12deg); z-index: 5;" data-story="The very first burger that made Daniyal's eyes light up. That moment when 'Bala' became more than just food—it became joy.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">First Bala</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 40px; left: -230px; transform: rotate(-6deg); z-index: 4;" data-story="Two brothers, different in many ways, but connected by love, laughter, and the simple joy of sharing a meal together.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Brothers</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 120px; left: -190px; transform: rotate(-15deg); z-index: 3;" data-story="Those car rides to get burgers—windows down, music up, Daniyal in the backseat making us all remember what happiness sounds like.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Drive</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 200px; left: -220px; transform: rotate(10deg); z-index: 2;" data-story="Every drive, every burger, every laugh—these memories are the foundation of everything we've built here.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Memories</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 280px; left: -180px; transform: rotate(-8deg); z-index: 1;" data-story="Being together doesn't require words. Sometimes the most profound connections happen in comfortable silence, shared smiles, and simple presence.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Together</p>
+                    </div>
+                </div>
+                
+                <!-- Polaroid Photos - Right Side -->
+                <div class="absolute polaroid" style="top: -40px; left: 720px; transform: rotate(15deg); z-index: 5;" data-story="Pure, unfiltered happiness. The kind that reminds you what really matters in life—moments like these.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Joy</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 40px; left: 750px; transform: rotate(8deg); z-index: 4;" data-story="His laughter is infectious, genuine, and pure. It's the sound that inspired everything you see here.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Laughter</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 120px; left: 710px; transform: rotate(-12deg); z-index: 3;" data-story="Danana—the name he gave himself, the identity he chose. A reminder that we all deserve to define ourselves on our own terms.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Danana</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 200px; left: 740px; transform: rotate(12deg); z-index: 2;" data-story="The way he'd hold his fork, looking up with pride—'See, I'm doing it too.' Independence celebrated in the smallest, most beautiful ways.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Fork Moment</p>
+                    </div>
+                </div>
+                
+                <div class="absolute polaroid" style="top: 280px; left: 700px; transform: rotate(-8deg); z-index: 1;" data-story="Every shared meal is a celebration. The simple act of eating together becomes profound when you realize how much love can be expressed without words.">
+                    <div class="bg-white p-2 shadow-xl rounded-sm">
+                        <div class="polaroid-photo w-20 h-16 rounded-sm mb-2 flex items-center justify-center text-gray-500 text-sm">
+                            📸
+                        </div>
+                        <p class="text-sm text-gray-700 text-center font-serif italic">Shared Meal</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tagline -->
+            <div class="text-reveal mb-8" style="animation-delay: 0.5s;">
+                <p class="text-lg md:text-xl text-white font-serif italic leading-relaxed">
+                    Where every Bala comes with a side of belonging.
+                </p>
+            </div>
+            
+            <!-- CTA Buttons -->
+            <div class="text-reveal flex flex-col sm:flex-row gap-4 justify-center items-center mb-12" style="animation-delay: 1s;">
+                <button onclick="scrollToSection('menu')" class="group relative overflow-hidden bg-gold text-forest px-8 py-3 rounded-full font-bold text-lg transition-all duration-500 transform hover:scale-105 tracking-wider">
+                    <span class="relative z-10">MENU</span>
+                </button>
+                
+                <button onclick="scrollToSection('story')" class="group relative border-2 border-gold text-gold px-8 py-3 rounded-full font-bold text-lg hover:bg-gold hover:text-forest transition-all duration-500 transform hover:scale-105 tracking-wider">
+                    <span class="relative z-10 flex items-center gap-2">
+                        <span>OUR STORY</span>
+                        <span class="group-hover:translate-x-2 transition-transform duration-300">→</span>
+                    </span>
+                </button>
+            </div>
+            
+
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section-fade py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-forest mb-6">Our Menu</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+                    Every "Bala" is crafted with love, honoring the joy of simple moments and the beauty of shared meals
+                </p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-8"></div>
+            </div>
+            
+            <!-- Burgers Section -->
+            <div class="mb-20">
+                <h3 class="text-4xl font-serif font-bold text-forest mb-12 text-center">Signature Burgers</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- The Danana Classic -->
+                    <div class="menu-item bg-white rounded-3xl p-8 border-2 border-gray-100 hover:border-gold shadow-lg">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <h4 class="text-2xl font-serif font-bold text-forest">The Danana Classic</h4>
+                                    <span class="popular-badge">Most Popular</span>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed mb-4 font-light">
+                                    Our signature burger featuring premium Angus beef patty, aged Canadian cheddar, 
+                                    crispy iceberg lettuce, vine-ripened tomatoes, and our house-made Danana sauce 
+                                    on a golden brioche bun.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Beef</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Dairy</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Gluten</span>
+                                </div>
+                            </div>
+                            <div class="text-right ml-6">
+                                <div class="text-3xl font-bold text-gold font-serif">$16.99</div>
+                            </div>
+                        </div>
+                        <div class="w-full h-32 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center text-gray-500 mb-4">
+                            🍔 Burger Photo
+                        </div>
+                    </div>
+                    
+                    <!-- The Golden Deluxe -->
+                    <div class="menu-item bg-white rounded-3xl p-8 border-2 border-gray-100 hover:border-gold shadow-lg">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <h4 class="text-2xl font-serif font-bold text-forest">The Golden Deluxe</h4>
+                                    <span class="premium-badge">Premium</span>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed mb-4 font-light">
+                                    Double Angus beef patties with triple cheese blend (cheddar, swiss, provolone), 
+                                    caramelized onions, crispy bacon, garlic aioli, and arugula on a golden brioche bun.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Beef</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Dairy</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Pork</span>
+                                </div>
+                            </div>
+                            <div class="text-right ml-6">
+                                <div class="text-3xl font-bold text-gold font-serif">$22.99</div>
+                            </div>
+                        </div>
+                        <div class="w-full h-32 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center text-gray-500 mb-4">
+                            🍔 Burger Photo
+                        </div>
+                    </div>
+                    
+                    <!-- Toronto Heat -->
+                    <div class="menu-item bg-white rounded-3xl p-8 border-2 border-gray-100 hover:border-gold shadow-lg">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <h4 class="text-2xl font-serif font-bold text-forest">Toronto Heat</h4>
+                                    <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-sm font-semibold">🌶️ Spicy</span>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed mb-4 font-light">
+                                    Spiced beef patty with jalapeños, pepper jack cheese, chipotle mayo, 
+                                    pickled red onions, and fresh cilantro on a toasted sesame bun.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Beef</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Dairy</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Spicy</span>
+                                </div>
+                            </div>
+                            <div class="text-right ml-6">
+                                <div class="text-3xl font-bold text-gold font-serif">$18.99</div>
+                            </div>
+                        </div>
+                        <div class="w-full h-32 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center text-gray-500 mb-4">
+                            🍔 Burger Photo
+                        </div>
+                    </div>
+                    
+                    <!-- Garden Fresh -->
+                    <div class="menu-item bg-white rounded-3xl p-8 border-2 border-gray-100 hover:border-gold shadow-lg">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    <h4 class="text-2xl font-serif font-bold text-forest">Garden Fresh</h4>
+                                    <span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-sm font-semibold">🌱 Vegan</span>
+                                </div>
+                                <p class="text-gray-600 leading-relaxed mb-4 font-light">
+                                    House-made plant-based patty with avocado, sprouts, vegan cheese, 
+                                    roasted red peppers, and herb aioli on a whole grain bun.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Plant-based</span>
+                                    <span class="bg-forest/10 text-forest px-3 py-1 rounded-full text-sm">Vegan</span>
+                                </div>
+                            </div>
+                            <div class="text-right ml-6">
+                                <div class="text-3xl font-bold text-gold font-serif">$17.99</div>
+                            </div>
+                        </div>
+                        <div class="w-full h-32 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center text-gray-500 mb-4">
+                            🍔 Burger Photo
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sides & Beverages -->
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Sides -->
+                <div>
+                    <h3 class="text-3xl font-serif font-bold text-forest mb-8 text-center">Sides</h3>
+                    <div class="space-y-4">
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Golden Fries</h4>
+                                    <p class="text-gray-600 font-light">Hand-cut, seasoned with our signature spice blend</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$6.99</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Sweet Potato Fries</h4>
+                                    <p class="text-gray-600 font-light">Crispy sweet potato fries with maple aioli</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$7.99</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Onion Rings</h4>
+                                    <p class="text-gray-600 font-light">Beer-battered onion rings with ranch dip</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$8.99</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Beverages -->
+                <div>
+                    <h3 class="text-3xl font-serif font-bold text-forest mb-8 text-center">Beverages</h3>
+                    <div class="space-y-4">
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Craft Milkshakes</h4>
+                                    <p class="text-gray-600 font-light">Vanilla, chocolate, strawberry - made with local ice cream</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$7.99</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Fresh Lemonades</h4>
+                                    <p class="text-gray-600 font-light">Classic, pink, or flavored with seasonal fruits</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$4.99</div>
+                            </div>
+                        </div>
+                        
+                        <div class="menu-item bg-gray-50 rounded-2xl p-6 border border-transparent hover:border-gold">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <h4 class="text-xl font-serif font-bold text-forest mb-1">Craft Sodas</h4>
+                                    <p class="text-gray-600 font-light">Local craft sodas and traditional favorites</p>
+                                </div>
+                                <div class="text-2xl font-bold text-gold font-serif">$3.99</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section id="story" class="section-fade py-20 bg-forest text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold mb-6">Our Story</h2>
+                <div class="w-24 h-1 bg-gold mx-auto"></div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Daniyal's Photo -->
+                <div class="text-center">
+                    <div class="relative inline-block mb-8">
+                        <div class="w-80 h-80 bg-gold/20 rounded-3xl mx-auto flex items-center justify-center border-4 border-gold/30 shadow-2xl relative overflow-hidden">
+                            <!-- Glowing particles around photo -->
+                            <div class="absolute top-4 right-4 w-3 h-3 bg-gold rounded-full animate-pulse"></div>
+                            <div class="absolute bottom-6 left-6 w-2 h-2 bg-gold/70 rounded-full animate-pulse" style="animation-delay: 1s;"></div>
+                            <div class="absolute top-1/2 left-4 w-1 h-1 bg-gold/50 rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+                            
+                            <div class="text-center">
+                                <div class="text-6xl mb-4">📸</div>
+                                <p class="text-gold font-serif font-semibold text-lg">Daniyal's Photo</p>
+                                <p class="text-white/70 text-sm">Coming Soon</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Polaroid frames around main photo -->
+                        <div class="absolute -top-6 -right-6 w-16 h-20 bg-white/10 rounded-sm transform rotate-12 border border-gold/20"></div>
+                        <div class="absolute -bottom-4 -left-4 w-12 h-16 bg-white/10 rounded-sm transform -rotate-6 border border-gold/20"></div>
+                    </div>
+                    <h3 class="text-4xl font-serif font-bold text-gold mb-2">Daniyal</h3>
+                    <p class="text-2xl font-serif italic opacity-90">"Danana"</p>
+                </div>
+                
+                <!-- Story Text -->
+                <div class="space-y-8">
+                    <div class="story-quote text-center lg:text-left mb-12">
+                        He doesn't need words. He's always said enough just by being.
+                    </div>
+                    
+                    <div class="space-y-6 story-text">
+                        <p class="text-reveal">
+                            Daniyal is my younger brother. He's differently abled. He can't speak much—but somehow, 
+                            he's always known how to say the most important things.
+                        </p>
+                        
+                        <p class="text-reveal">
+                            He calls himself "Danana." And every time we'd get him a burger, he'd light up and call it "Bala." 
+                            That became our ritual. A drive. A burger. His laughter in the backseat. The way he'd try to hold 
+                            the fork, looking up at us like—"See, I'm doing it too."
+                        </p>
+                        
+                        <p class="text-reveal text-gold font-medium">
+                            That kind of joy? It's rare. And real.
+                        </p>
+                        
+                        <p class="text-reveal">
+                            So I built Danana's Burger Bar as a tribute to that feeling. Not just for Daniyal, but for all of us. 
+                            For the people who are often overlooked. For anyone who's ever felt like they had to earn their space. 
+                            This is a place where you don't have to.
+                        </p>
+                        
+                        <p class="text-reveal">
+                            Because sometimes the quietest people leave the loudest impact. Daniyal has shown me how to slow down, 
+                            how to find joy in the smallest things, and how to be seen—without ever needing to explain yourself.
+                        </p>
+                        
+                        <p class="text-reveal">
+                            In Pakistan, over 27 million people live with disabilities—but very few places are built for them. 
+                            I wanted to change that, even if it's just one place, one Bala at a time.
+                        </p>
+                        
+                        <div class="bg-gold/10 rounded-3xl p-8 mt-12 text-reveal">
+                            <div class="space-y-4 text-center">
+                                <p class="text-xl font-serif font-semibold text-gold">
+                                    This place is for him.<br>
+                                    This place is for you.<br>
+                                    This place is for all of us.
+                                </p>
+                                <p class="text-lg font-light">
+                                    <span class="text-gold font-serif font-bold text-xl">Danana's Burger Bar</span><br>
+                                    where every Bala comes with a side of belonging.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catering Section -->
+    <section id="catering" class="section-fade py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-forest mb-6">Catering & Events</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                    Bring the Bala to Your Party - Creating spaces of belonging, one event at a time
+                </p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-8"></div>
+            </div>
+            
+            <!-- Timeline Style Layout -->
+            <div class="relative">
+                <!-- Timeline Line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gold/20 hidden lg:block"></div>
+                
+                <div class="space-y-16">
+                    <!-- Corporate Events -->
+                    <div class="flex flex-col lg:flex-row items-center gap-8">
+                        <div class="lg:w-1/2 lg:pr-8">
+                            <div class="bg-gray-50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                <div class="text-6xl mb-6 text-center">🏢</div>
+                                <h3 class="text-3xl font-serif font-bold text-forest mb-4 text-center">Corporate Events</h3>
+                                <p class="text-gray-600 mb-6 text-center font-light">
+                                    Perfect for office parties, meetings, and corporate gatherings where connection matters
+                                </p>
+                                <ul class="space-y-3 text-gray-600 mb-8">
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Minimum 20 people
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Custom menu options
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Professional setup & service
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Inclusive dining experience
+                                    </li>
+                                </ul>
+                                <div class="text-center">
+                                    <button class="bg-gold text-forest px-8 py-4 rounded-full font-semibold hover:bg-gold-dark transition-colors">
+                                        Get Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <div class="w-full h-64 bg-gradient-to-br from-forest/10 to-gold/10 rounded-3xl flex items-center justify-center">
+                                <span class="text-4xl">🎉 Event Illustration</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Private Parties -->
+                    <div class="flex flex-col lg:flex-row-reverse items-center gap-8">
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <div class="bg-gray-50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                <div class="text-6xl mb-6 text-center">🎂</div>
+                                <h3 class="text-3xl font-serif font-bold text-forest mb-4 text-center">Private Parties</h3>
+                                <p class="text-gray-600 mb-6 text-center font-light">
+                                    Make your celebration unforgettable with food that brings people together
+                                </p>
+                                <ul class="space-y-3 text-gray-600 mb-8">
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Birthdays & celebrations
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Flexible packages
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Setup & cleanup included
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Accessible for all guests
+                                    </li>
+                                </ul>
+                                <div class="text-center">
+                                    <button class="bg-gold text-forest px-8 py-4 rounded-full font-semibold hover:bg-gold-dark transition-colors">
+                                        Book Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pr-8">
+                            <div class="w-full h-64 bg-gradient-to-br from-gold/10 to-forest/10 rounded-3xl flex items-center justify-center">
+                                <span class="text-4xl">🎈 Party Illustration</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Community Events -->
+                    <div class="flex flex-col lg:flex-row items-center gap-8">
+                        <div class="lg:w-1/2 lg:pr-8">
+                            <div class="bg-gray-50 rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                                <div class="text-6xl mb-6 text-center">🤝</div>
+                                <h3 class="text-3xl font-serif font-bold text-forest mb-4 text-center">Community Events</h3>
+                                <p class="text-gray-600 mb-6 text-center font-light">
+                                    Supporting schools, nonprofits, and community organizations with inclusive dining
+                                </p>
+                                <ul class="space-y-3 text-gray-600 mb-8">
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Allergy-conscious options
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Nonprofit discounts
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Accessibility focused
+                                    </li>
+                                    <li class="flex items-center gap-3">
+                                        <span class="w-2 h-2 bg-gold rounded-full"></span>
+                                        Community partnership
+                                    </li>
+                                </ul>
+                                <div class="text-center">
+                                    <button class="bg-gold text-forest px-8 py-4 rounded-full font-semibold hover:bg-gold-dark transition-colors">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:w-1/2 lg:pl-8">
+                            <div class="w-full h-64 bg-gradient-to-br from-forest/10 to-gold/10 rounded-3xl flex items-center justify-center">
+                                <span class="text-4xl">🏫 Community Illustration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pop-up Updates Section -->
+    <section id="updates" class="section-fade py-20 bg-forest text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold mb-6">Pop-up Updates</h2>
+                <p class="text-xl opacity-90 max-w-3xl mx-auto font-light leading-relaxed">
+                    Follow our journey to opening and catch us at pop-up events around Toronto!
+                </p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-8"></div>
+            </div>
+            
+            <!-- Interactive Toronto Map -->
+            <div class="interactive-map mb-16 relative">
+                <h3 class="text-3xl font-serif font-bold text-center mb-8">Find Us Around Toronto</h3>
+                <div class="relative h-96 bg-forest-light rounded-3xl overflow-hidden">
+                    <!-- Map Background -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-forest-light to-forest opacity-50"></div>
+                    
+                    <!-- Map Pins -->
+                    <div class="map-pin" style="top: 30%; left: 40%;" data-location="Kensington Market" data-date="Dec 15, 2024" data-special="Danana Classic Preview"></div>
+                    <div class="map-pin" style="top: 50%; left: 60%;" data-location="Distillery District" data-date="Dec 22, 2024" data-special="Holiday Special"></div>
+                    <div class="map-pin" style="top: 40%; left: 30%;" data-location="Trinity Bellwoods" data-date="Jan 5, 2025" data-special="New Year Bala"></div>
+                    
+                    <!-- Map Labels -->
+                    <div class="absolute top-4 left-4 text-gold font-serif font-bold text-lg">Toronto Pop-up Locations</div>
+                    <div class="absolute bottom-4 right-4 text-white/70 text-sm">Click pins for details</div>
+                </div>
+            </div>
+            
+            <!-- Upcoming Events -->
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <div class="bg-forest-light rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl mr-4">📅</div>
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-gold">Next Pop-up Event</h3>
+                            <p class="opacity-90 font-light">December 15, 2024</p>
+                        </div>
+                    </div>
+                    <h4 class="text-3xl font-serif font-bold mb-4">Kensington Market Food Festival</h4>
+                    <p class="opacity-90 mb-6 font-light leading-relaxed">
+                        Join us for a special preview of our signature burgers! We'll be serving limited quantities 
+                        of our most popular items and sharing Daniyal's story with the community.
+                    </p>
+                    <div class="flex items-center gap-2 text-gold font-semibold">
+                        <span>📍</span>
+                        <span>Kensington Market, Toronto</span>
+                    </div>
+                </div>
+                
+                <div class="bg-forest-light rounded-3xl p-8 hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2">
+                    <div class="flex items-center mb-6">
+                        <div class="text-4xl mr-4">🏗️</div>
+                        <div>
+                            <h3 class="text-2xl font-serif font-bold text-gold">Construction Update</h3>
+                            <p class="opacity-90 font-light">Week of December 9, 2024</p>
+                        </div>
+                    </div>
+                    <h4 class="text-3xl font-serif font-bold mb-4">Interior Design Progress</h4>
+                    <p class="opacity-90 mb-6 font-light leading-relaxed">
+                        Our beautiful, accessible dining space is taking shape! The kitchen equipment has been installed 
+                        and we're putting the finishing touches on our inclusive seating area.
+                    </p>
+                    <div class="bg-gold/20 rounded-2xl p-4">
+                        <p class="text-gold font-serif font-semibold text-lg">🎯 Grand Opening: January 2025</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <div class="bg-gold/10 rounded-3xl p-12 text-center backdrop-blur-sm">
+                <h3 class="text-4xl font-serif font-bold mb-6">Don't Miss the Next Bala</h3>
+                <p class="text-xl opacity-90 mb-8 font-light max-w-2xl mx-auto leading-relaxed">
+                    Get exclusive updates, pop-up locations, and be the first to know about our grand opening and special events!
+                </p>
+                <div class="max-w-md mx-auto flex gap-4">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 rounded-full text-forest focus:outline-none focus:ring-2 focus:ring-gold font-medium">
+                    <button class="bg-gold text-forest px-8 py-4 rounded-full font-semibold hover:bg-gold-dark transition-colors">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Merch Section -->
+    <section id="merch" class="section-fade py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-serif font-bold text-forest mb-6">Danana's Merch</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+                    Show your love for Danana's with our exclusive merchandise collection - 
+                    every purchase supports our mission of creating inclusive spaces
+                </p>
+                <div class="w-24 h-1 bg-gold mx-auto mt-8"></div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                <!-- Classic T-Shirt -->
+                <div class="product-card bg-gray-50 rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500">
+                    <div class="w-full h-48 bg-gradient-to-br from-forest/10 to-gold/10 rounded-2xl mb-6 flex items-center justify-center text-6xl">
+                        👕
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-forest mb-3">Classic T-Shirt</h3>
+                    <p class="text-gray-600 mb-4 font-light">
+                        Soft organic cotton tee with our iconic logo and "Built for Belonging" message
+                    </p>
+                    <div class="text-3xl font-bold text-gold font-serif mb-6">$24.99</div>
+                    <button class="w-full bg-forest text-white px-6 py-3 rounded-full hover:bg-forest-light transition-colors font-semibold">
+                        Pre-Order
+                    </button>
+                </div>
+                
+                <!-- Snapback Hat -->
+                <div class="product-card bg-gray-50 rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500">
+                    <div class="w-full h-48 bg-gradient-to-br from-gold/10 to-forest/10 rounded-2xl mb-6 flex items-center justify-center text-6xl">
+                        🧢
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-forest mb-3">Snapback Hat</h3>
+                    <p class="text-gray-600 mb-4 font-light">
+                        Adjustable cap in forest green with gold embroidered logo
+                    </p>
+                    <div class="text-3xl font-bold text-gold font-serif mb-6">$29.99</div>
+                    <button class="w-full bg-forest text-white px-6 py-3 rounded-full hover:bg-forest-light transition-colors font-semibold">
+                        Pre-Order
+                    </button>
+                </div>
+                
+                <!-- Coffee Mug -->
+                <div class="product-card bg-gray-50 rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500">
+                    <div class="w-full h-48 bg-gradient-to-br from-forest/10 to-gold/10 rounded-2xl mb-6 flex items-center justify-center text-6xl">
+                        ☕
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-forest mb-3">Coffee Mug</h3>
+                    <p class="text-gray-600 mb-4 font-light">
+                        Ceramic mug with gold rim and "Every Bala Counts" inscription
+                    </p>
+                    <div class="text-3xl font-bold text-gold font-serif mb-6">$16.99</div>
+                    <button class="w-full bg-forest text-white px-6 py-3 rounded-full hover:bg-forest-light transition-colors font-semibold">
+                        Pre-Order
+                    </button>
+                </div>
+                
+                <!-- Tote Bag -->
+                <div class="product-card bg-gray-50 rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-500">
+                    <div class="w-full h-48 bg-gradient-to-br from-gold/10 to-forest/10 rounded-2xl mb-6 flex items-center justify-center text-6xl">
+                        🎒
+                    </div>
+                    <h3 class="text-2xl font-serif font-bold text-forest mb-3">Tote Bag</h3>
+                    <p class="text-gray-600 mb-4 font-light">
+                        Eco-friendly canvas bag with Danana's logo and mission statement
+                    </p>
+                    <div class="text-3xl font-bold text-gold font-serif mb-6">$19.99</div>
+                    <button class="w-full bg-forest text-white px-6 py-3 rounded-full hover:bg-forest-light transition-colors font-semibold">
+                        Pre-Order
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-gray-600 mb-8 font-light text-lg">
+                    All merchandise will be available at our grand opening in January 2025!<br>
+                    <span class="text-gold font-medium">10% of proceeds support accessibility initiatives in Toronto</span>
+                </p>
+                <button class="bg-gold text-forest px-12 py-5 rounded-full font-bold text-xl hover:bg-gold-dark transition-colors transform hover:scale-105">
+                    You Just Brought a Bala Home
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-forest text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="text-3xl font-bold text-gold font-serif mb-6 flex items-center gap-3">
+                        <span class="text-4xl">🍔</span>
+                        Danana's
+                    </div>
+                    <p class="opacity-90 font-light leading-relaxed mb-6">
+                        Toronto's most anticipated burger experience, opening January 2025. 
+                        A place where every Bala comes with a side of belonging.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="bg-gold/20 p-4 rounded-full hover:bg-gold/30 transition-colors text-2xl">📘</button>
+                        <button class="bg-gold/20 p-4 rounded-full hover:bg-gold/30 transition-colors text-2xl">📷</button>
+                        <button class="bg-gold/20 p-4 rounded-full hover:bg-gold/30 transition-colors text-2xl">🐦</button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gold mb-6 text-xl font-serif">Quick Links</h4>
+                    <ul class="space-y-3 opacity-90">
+                        <li><a href="#menu" class="hover:text-gold transition-colors font-light">Our Menu</a></li>
+                        <li><a href="#story" class="hover:text-gold transition-colors font-light">Our Story</a></li>
+                        <li><a href="#catering" class="hover:text-gold transition-colors font-light">Catering</a></li>
+                        <li><a href="#merch" class="hover:text-gold transition-colors font-light">Merchandise</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gold mb-6 text-xl font-serif">Contact</h4>
+                    <ul class="space-y-3 opacity-90 font-light">
+                        <li class="flex items-center gap-3">
+                            <span>📧</span>
+                            <span>hello@dananasburgers.com</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span>📱</span>
+                            <span>(416) 555-BURGER</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <span>📍</span>
+                            <span>Coming to Toronto, ON</span>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-gold mb-6 text-xl font-serif">Our Mission</h4>
+                    <p class="opacity-90 font-light leading-relaxed">
+                        Creating inclusive spaces where everyone belongs, 
+                        one Bala at a time. Supporting accessibility initiatives 
+                        and celebrating the beauty of differences.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-gold/20 pt-8">
+                <div class="text-center">
+                    <p class="text-2xl font-serif font-bold text-gold mb-4">
+                        Built for Daniyal. Built for Everyone.
+                    </p>
+                    <p class="opacity-90 font-light">
+                        &copy; 2024 Danana's Burger Bar. All rights reserved. Made with ❤️ in Toronto.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox for Polaroid Stories -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+            <div id="lightbox-story"></div>
+        </div>
+    </div>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 2000);
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('customCursor');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', function(e) {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function animateCursor() {
+            const speed = 0.1;
+            cursorX += (mouseX - cursorX) * speed;
+            cursorY += (mouseY - cursorY) * speed;
+            
+            cursor.style.left = cursorX - 10 + 'px';
+            cursor.style.top = cursorY - 10 + 'px';
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Cursor hover effects
+        document.querySelectorAll('button, .polaroid, .menu-item, .nav-link, .product-card, .map-pin').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                cursor.classList.add('hover');
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                cursor.classList.remove('hover');
+            });
+        });
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Navigation highlighting
+        window.addEventListener('scroll', function() {
+            const sections = ['home', 'menu', 'story', 'catering', 'updates', 'merch'];
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const element = document.getElementById(section);
+                const rect = element.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    current = section;
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add click handlers for all navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        // Vinyl record click interaction
+        document.querySelector('.vinyl-record').addEventListener('click', function() {
+            // Future Spotify integration will go here
+            console.log('Vinyl clicked - Future Spotify integration');
+        });
+
+        // Polaroid lightbox functionality
+        document.querySelectorAll('.polaroid').forEach(polaroid => {
+            polaroid.addEventListener('click', function() {
+                const story = this.getAttribute('data-story');
+                const caption = this.querySelector('p').textContent;
+                
+                document.getElementById('lightbox-story').innerHTML = `
+                    <h3 class="text-2xl font-serif font-bold text-forest mb-4">${caption}</h3>
+                    <p class="text-gray-700 leading-relaxed text-lg">${story}</p>
+                `;
+                
+                document.getElementById('lightbox').classList.add('active');
+            });
+        });
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        // Map pin interactions
+        document.querySelectorAll('.map-pin').forEach(pin => {
+            pin.addEventListener('click', function() {
+                const location = this.getAttribute('data-location');
+                const date = this.getAttribute('data-date');
+                const special = this.getAttribute('data-special');
+                
+                alert(`📍 ${location}\n📅 ${date}\n🍔 Special: ${special}`);
+            });
+        });
+
+        // Text reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (entry.target.classList.contains('text-reveal')) {
+                        entry.target.classList.add('revealed');
+                    }
+                    if (entry.target.classList.contains('section-fade')) {
+                        entry.target.classList.add('visible');
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all text reveal and section fade elements
+        document.querySelectorAll('.text-reveal, .section-fade').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Newsletter subscription
+        document.querySelector('input[type="email"]').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const email = this.value;
+                if (email) {
+                    alert('Thanks for subscribing! We\'ll keep you updated on our grand opening and pop-up events. 🍔');
+                    this.value = '';
+                }
+            }
+        });
+
+        // Subscribe button
+        document.querySelector('button:contains("Subscribe")') && document.querySelector('button:contains("Subscribe")').addEventListener('click', function() {
+            const emailInput = document.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            if (email) {
+                alert('Thanks for subscribing! We\'ll keep you updated on our grand opening and pop-up events. 🍔');
+                emailInput.value = '';
+            } else {
+                alert('Please enter your email address.');
+            }
+        });
+
+        // Initialize text reveals on page load
+        setTimeout(() => {
+            document.querySelectorAll('.text-reveal').forEach((element, index) => {
+                setTimeout(() => {
+                    element.classList.add('revealed');
+                }, index * 200);
+            });
+        }, 500);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'965ddd0406e8e246',t:'MTc1MzYzNzQxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
