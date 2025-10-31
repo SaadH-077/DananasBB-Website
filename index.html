@@ -1,0 +1,980 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Danana's Burger Bar - Feed Your Inner Child</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Fredoka+One:wght@400&family=Dancing+Script:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+        />
+        <!-- External Stylesheets -->
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/animations.css" />
+        <link rel="stylesheet" href="css/responsive.css" />
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            forest: "#0D3B2F", // Matches logo green
+                            "forest-light": "#1A5043",
+                            "forest-dark": "#082820",
+                            gold: "#D4AF37", // Matches logo gold
+                            "gold-light": "#E6C85C", // Light champagne gold
+                            "gold-dark": "#B8941F", // Rich gold
+                            cream: "#FFF8DC", // Cornsilk
+                            white: "#FFFFFF",
+                            "warm-white": "#FEFCF8",
+                        },
+                        fontFamily: {
+                            serif: ["Playfair Display", "serif"],
+                            sans: ["Inter", "sans-serif"],
+                            display: ["Fredoka One", "cursive"],
+                        },
+                        backgroundImage: {
+                            "brick-pattern":
+                                'url(\'data:image/svg+xml,%3Csvg width="40" height="20" viewBox="0 0 40 20" xmlns="http://www.w3.org/2000/svg"/%3E\')',
+                        },
+                    },
+                },
+            };
+        </script>
+
+        <!-- PDF Generation Libraries -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    </head>
+    <body class="bg-white font-sans" style="overflow-x: hidden">
+        <!-- Loading Screen - Premium Experience -->
+        <div class="loading-screen" id="loadingScreen">
+            <div class="text-center">
+                <div class="relative mb-12">
+                    <!-- Elegant rotating border -->
+                    <div class="w-36 h-36 mx-auto rounded-full border-4 border-gold/20 border-t-gold animate-spin"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <img src="assets/images/Dananas Logo.jpeg" alt="Danana's" class="w-24 h-24 rounded-full shadow-2xl">
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <!-- Top divider -->
+                    <div class="flex items-center justify-center mb-8">
+                        <div class="h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+                    </div>
+                    
+                    <!-- Brand Name -->
+                    <h1 class="text-6xl md:text-7xl font-serif font-bold text-gold mb-5" 
+                        style="font-family: 'Playfair Display', serif; 
+                               letter-spacing: 0.25em;
+                               text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);">
+                        DANANA'S
+                    </h1>
+                    
+                    <!-- Underline -->
+                    <div class="flex justify-center mb-6">
+                        <div class="w-48 h-1 bg-gold"></div>
+                    </div>
+                    
+                    <!-- Subtitle -->
+                    <p class="text-3xl text-gold font-serif italic mb-8" 
+                       style="font-family: 'Dancing Script', cursive;">
+                        Burger Bar
+                    </p>
+                    
+                    <!-- Bottom divider -->
+                    <div class="flex items-center justify-center">
+                        <div class="h-px w-24 bg-gradient-to-r from-transparent via-gold to-transparent"></div>
+                    </div>
+                </div>
+                
+                <p class="text-xs text-gold/70 tracking-[0.35em] uppercase" 
+                   style="font-family: 'Playfair Display', serif; font-weight: 300;">
+                    Crafting Your Experience
+                </p>
+            </div>
+        </div>
+
+        <!-- Custom Cursor -->
+        <div class="custom-cursor" id="customCursor"></div>
+
+        <!-- Navigation -->
+        <nav
+            class="fixed top-0 left-0 w-full bg-forest/95 backdrop-blur-sm z-50 transition-all duration-300"
+            id="navbar"
+        >
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-20 w-full">
+                    <div class="flex items-center">
+                        <div class="flex items-center gap-4">
+                            <img
+                                src="Dananas Logo.jpeg"
+                                alt="Danana's Logo"
+                                class="w-12 h-12 rounded-full border-2 border-gold shadow-lg"
+                            />
+                            <div
+                                class="text-2xl font-bold text-gold"
+                                style="font-family: 'Playfair Display', serif; letter-spacing: 0.05em;"
+                            >
+                                DANANA'S
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-8">
+                            <a
+                                href="#home"
+                                class="nav-link text-white hover:text-gold font-medium active"
+                                >Home</a
+                            >
+                            <a
+                                href="#menu"
+                                class="nav-link text-white hover:text-gold font-medium"
+                                >Our Menu</a
+                            >
+                            <a
+                                href="#story"
+                                class="nav-link text-white hover:text-gold font-medium"
+                                >Our Story</a
+                            >
+                        </div>
+                    </div>
+                    <div class="md:hidden">
+                        <button
+                            id="mobile-menu-btn"
+                            class="text-white hover:text-gold"
+                        >
+                            <svg
+                                class="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="md:hidden hidden bg-forest">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a
+                        href="#home"
+                        class="block px-3 py-2 text-white hover:text-gold"
+                        >Home</a
+                    >
+                    <a
+                        href="#menu"
+                        class="block px-3 py-2 text-white hover:text-gold"
+                        >Our Menu</a
+                    >
+                    <a
+                        href="#story"
+                        class="block px-3 py-2 text-white hover:text-gold"
+                        >Our Story</a
+                    >
+                </div>
+            </div>
+        </nav>
+
+        <!-- Home Section - Exact Recreation with Layered Brick -->
+        <section
+            id="home"
+            class="min-h-screen relative overflow-hidden flex items-center justify-center"
+            style="background-color: #1a3d35; background-image: linear-gradient(to bottom, rgba(15, 50, 40, 0.88) 0%, rgba(20, 60, 50, 0.85) 50%, rgba(15, 50, 40, 0.88) 100%), url('https://images.unsplash.com/photo-1585438784936-0b0a6be17f37?w=1920&q=80'); background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed;"
+        >
+            <div class="max-w-md mx-auto px-6 text-center relative z-10 py-24">
+                
+                <!-- Top Section: Title + Badge -->
+                <div class="mb-8">
+                    <!-- DANANA'S - Large Title -->
+                    <h1 class="text-6xl sm:text-7xl font-bold mb-3" 
+                        style="font-family: 'Playfair Display', serif; 
+                               color: #f4d03f; 
+                               letter-spacing: 0.05em; 
+                               text-shadow: 2px 3px 10px rgba(0, 0, 0, 0.8);
+                               font-weight: 700;
+                               line-height: 1.1;">
+                        DANANA'S
+                    </h1>
+                    
+                    <!-- BURGER BAR - Smaller Subtitle -->
+                    <h2 class="text-lg sm:text-xl mb-5 tracking-[0.3em]" 
+                        style="font-family: 'Playfair Display', serif; 
+                               color: #f4d03f;
+                               font-weight: 400;
+                               text-shadow: 1px 2px 6px rgba(0, 0, 0, 0.7);">
+                        BURGER BAR
+                    </h2>
+                    
+                    <!-- Establishment Badge with Border and Rounded Corners -->
+                    <div class="inline-block border border-gold/70 rounded-md px-6 py-2.5 mb-1">
+                        <p class="text-xs tracking-[0.25em] text-gold/90" 
+                           style="font-family: 'Playfair Display', serif; font-weight: 300;">
+                            ESTABLISHED 2020 • TORONTO
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Vinyl Record -->
+                <div class="relative mb-8 flex items-center justify-center">
+                    <div class="spotify-wheel relative mx-auto">
+                        <div class="vinyl-record" id="vinylRecord">
+                            <div class="vinyl-outer">
+                                <div class="vinyl-grooves"></div>
+                            </div>
+                            <div class="vinyl-inner"></div>
+                            <div class="vinyl-center" id="vinylCenter">
+                                <div class="panda-logo"></div>
+                            </div>
+                        </div>
+                        <div class="music-notes" id="musicNotes">
+                            <div class="note">♪</div>
+                            <div class="note">♫</div>
+                            <div class="note">♪</div>
+                            <div class="note">♫</div>
+                            <div class="note">♬</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tagline Section -->
+                <div class="mb-10">
+                    <h3 class="text-2xl sm:text-3xl text-gold font-serif mb-3 leading-tight" 
+                       style="font-family: 'Playfair Display', serif; 
+                              font-weight: 600;
+                              text-shadow: 2px 3px 8px rgba(0, 0, 0, 0.7);">
+                        Where Every Bala Comes<br>with a Side of Belonging
+                    </h3>
+                    <p class="text-sm sm:text-base text-white/90 italic leading-relaxed px-2" 
+                       style="font-family: 'Playfair Display', serif; 
+                              font-weight: 300;
+                              text-shadow: 1px 2px 5px rgba(0, 0, 0, 0.7);">
+                        - A celebration of differences, served with love in Toronto
+                    </p>
+                </div>
+
+                <!-- Call-to-Action Buttons -->
+                <div class="flex flex-col gap-3.5 px-2">
+                    <a
+                        href="#menu"
+                        class="bg-gold text-forest px-10 py-4 font-bold text-sm tracking-[0.15em] transition-all duration-300 hover:bg-yellow-400 hover:shadow-xl w-full uppercase rounded-full text-center"
+                        style="font-family: 'Playfair Display', serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);"
+                    >
+                        VIEW MENU
+                    </a>
+
+                    <a
+                        href="#story"
+                        class="border-2 border-gold text-gold px-10 py-4 font-bold text-sm tracking-[0.15em] hover:bg-gold hover:text-forest transition-all duration-300 hover:shadow-xl w-full uppercase rounded-full flex items-center justify-center gap-2"
+                        style="font-family: 'Playfair Display', serif;"
+                    >
+                        <span>OUR STORY</span>
+                        <span class="text-base">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- MENU SECTION - Exact Recreation from Reference -->
+        <section id="menu" class="py-20 relative" style="background: linear-gradient(to bottom, #f5f1e8 0%, #ebe4d5 100%);">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Menu Header -->
+                <div class="text-center mb-16">
+                    <h2 class="text-5xl md:text-6xl font-bold mb-4" 
+                        style="font-family: 'Playfair Display', serif; 
+                               color: #1a3d35; 
+                               letter-spacing: 0.05em;">
+                        OUR MENU
+                    </h2>
+                    <p class="text-base text-gray-600 italic max-w-2xl mx-auto">
+                        Crafted with premium ingredients, each burger tells its own delicious story
+                    </p>
+                </div>
+
+                <!-- Signature Balas -->
+                <div class="mb-16">
+                    <h4 class="text-2xl font-bold mb-8 text-center" 
+                        style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                        Signature Balas
+                    </h4>
+
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Burger Card 1: Danana's Classic Bala -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Classic Bala.jpeg" 
+                                     alt="Danana's Classic Bala" 
+                                     class="w-full h-96 object-cover">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Most Popular
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Danana's Classic Bala
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $13
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    Handcrafted beef patty topped with rich aioli sauce, fresh lettuce, red beefsteak tomatoes & onions
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Handcrafted Beef Patty</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Rich Aioli Sauce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Fresh Lettuce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Red Beefsteak Tomatoes</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Onions</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burger Card 2: Danana's Golden Deluxe -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Golden Deluxe.jpeg" 
+                                     alt="Danana's Golden Deluxe" 
+                                     class="w-full h-96 object-cover">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Premium
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Danana's Golden Deluxe
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $16
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    Butcher's cut Beef or Chicken Patty topped with Danana's Special Sauce, American Cheddar, Hickory smoked Mushrooms, Caramelized Onions, Potato Bun
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Butcher's Cut Beef/Chicken</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Danana's Special Sauce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">American Cheddar</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Hickory Smoked Mushrooms</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Caramelized Onions</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Potato Bun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burger Card 3: Danana's Veggie Bala -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Veggie Bala.jpeg" 
+                                     alt="Danana's Veggie Bala" 
+                                     class="w-full h-96 object-cover object-bottom">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Vegan 
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Danana's Veggie Bala
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $14
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    A wholesome plant-based delight featuring a grilled veggie patty topped with Danana's Special Vegan Sauce, hickory smoked mushrooms, caramelized onions, fresh lettuce, and house-cut tomatoes on a soft potato bun.
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Veggie Patty</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Danana's Special Vegan Sauce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Hickory Smoked Mushrooms</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Caramelized Onions</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Lettuce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Tomato</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Potato Bun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burger Card 4: Laal Qila -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Laal Qila.jpeg" 
+                                     alt="Laal Qila" 
+                                     class="w-full h-96 object-cover object-bottom">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Spicy
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Laal Qila
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $15
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    A fiery fortress of flavor! Spicy Cheeto-coated chicken marinated with fresh herbs and secret spices, topped with hickory-smoked onions, mushrooms, and house-cut tomatoes for an unforgettable kick.
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Spicy Cheeto Coated Chicken</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Fresh Herb Marinade</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Hickory Smoked Onions</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Hickory Smoked Mushrooms</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">House-Cut Tomatoes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burger Card 5: Danana's 'Niagara Crunch' Bala -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Niagara Crunch.jpeg" 
+                                     alt="Danana's 'Niagara Crunch' Bala" 
+                                     class="w-full h-96 object-cover object-bottom">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Crispy
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Niagara Crunch
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $14
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    A crispy indulgence inspired by the falls! Buttermilk-marinated chicken topped with caramelized onions, hickory-smoked mushrooms, Danana's Special Sauce, butter-head lettuce, and house-cut tomatoes for the perfect crunch in every bite.
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Buttermilk Marinated Chicken</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Caramelized Onions</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Hickory Smoked Mushrooms</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Danana's Special Sauce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Butter-Head Lettuce</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">House-Cut Tomatoes</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Burger Card 6: Suzy -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Suzy.jpeg" 
+                                     alt="Suzy" 
+                                     class="w-full h-96 object-cover">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Cheese Stuffed
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Suzy
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $18
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    A bold creation bursting with attitude! Swiss and Kraft American Cheese stuffed inside a succulent beef patty, topped with our special spicy Cuban Jam, all wrapped in a soft Brioche Bun.
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Cheese-Stuffed Beef Patty</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Swiss Cheese</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Kraft American Cheese</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Spicy Cuban Jam</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Brioche Bun</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sides & Appetizers Section -->
+                <div class="mb-16">
+                    <h4 class="text-2xl font-bold mb-8 text-center" 
+                        style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                        Appetizers
+                    </h4>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Appetizer 1: Bubu Bombs -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/Bubu Bombs.jpeg" 
+                                     alt="Bubu Bombs" 
+                                     class="w-full h-72 object-cover object-bottom-right" style="object-position: 75% 75%;">
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Bubu Bombs
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $9
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    Swiss-jalapeño cream cheese wrapped in a layer of chicken breast covered in golden fried bread crumbs
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Swiss-Jalapeño Cream Cheese</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Chicken Breast</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Golden Bread Crumbs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Appetizer 2: BUFF-AELO BITES -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300">
+                            <div class="relative">
+                                <img src="assets/images/BUFF-AELO BITES.jpeg" 
+                                     alt="BUFF-AELO BITES" 
+                                     class="w-full h-72 object-cover">
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        BUFF-AELO BITES
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $9
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4">
+                                    Buffalo chicken bites dipped in special spices topped with Frank's Red Hot Sauce
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Buffalo Chicken</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Special Spice Blend</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Frank's Red Hot Sauce</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Combos & Add-Ons Info -->
+                <div class="max-w-3xl mx-auto mt-12 mb-16">
+                    <div class="bg-forest/95 rounded-2xl p-8 shadow-2xl border-2 border-gold/30">
+                        <div class="text-center mb-6">
+                            <h4 class="text-2xl font-bold text-gold mb-2" style="font-family: 'Playfair Display', serif; letter-spacing: 1px;">
+                                CREATE YOUR COMBO
+                            </h4>
+                            <div class="w-16 h-1 bg-gold mx-auto"></div>
+                        </div>
+                        
+                        <p class="text-center text-white/90 text-sm mb-6 italic" style="font-family: 'Inter', sans-serif;">
+                            Enhance your meal with our delicious add-ons
+                        </p>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white/10 rounded-xl p-5 backdrop-blur-sm border border-gold/20 hover:border-gold/40 transition-all">
+                                <div class="flex justify-between items-baseline">
+                                    <div>
+                                        <h5 class="text-lg font-bold text-white mb-1" style="font-family: 'Playfair Display', serif;">
+                                            Fries
+                                        </h5>
+                                        <p class="text-xs text-white/70" style="font-family: 'Inter', sans-serif;">Crispy golden perfection</p>
+                                    </div>
+                                    <span class="text-xl font-bold text-gold" style="font-family: 'Playfair Display', serif;">
+                                        $3.79
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="bg-white/10 rounded-xl p-5 backdrop-blur-sm border border-gold/20 hover:border-gold/40 transition-all">
+                                <div class="flex justify-between items-baseline">
+                                    <div>
+                                        <h5 class="text-lg font-bold text-white mb-1" style="font-family: 'Playfair Display', serif;">
+                                            Drink
+                                        </h5>
+                                        <p class="text-xs text-white/70" style="font-family: 'Inter', sans-serif;">Your choice of beverage</p>
+                                    </div>
+                                    <span class="text-xl font-bold text-gold" style="font-family: 'Playfair Display', serif;">
+                                        $3
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Desserts Section -->
+                <div class="mb-16">
+                    <h4 class="text-2xl font-bold mb-8 text-center" 
+                        style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                        Desserts
+                    </h4>
+                    <div class="flex justify-center">
+                        <!-- Dessert: Tiramisu -->
+                        <div class="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 max-w-md">
+                            <div class="relative">
+                                <img src="assets/images/Tiramisu.jpeg" 
+                                     alt="Tiramisu" 
+                                     class="w-full h-72 object-cover">
+                                <span class="absolute top-3 right-3 bg-gold text-forest px-3 py-1 rounded-full text-xs font-bold">
+                                    Italian Classic
+                                </span>
+                            </div>
+                            <div class="p-6">
+                                <div class="flex justify-between items-baseline mb-3">
+                                    <h5 class="text-xl font-bold" style="font-family: 'Playfair Display', serif; color: #1a3d35;">
+                                        Tiramisu
+                                    </h5>
+                                    <span class="text-2xl font-bold whitespace-nowrap ml-3" style="font-family: 'Playfair Display', serif; color: #B8860B;">
+                                        $7
+                                    </span>
+                                </div>
+                                <p class="text-sm text-gray-600 leading-relaxed mb-4 italic">
+                                    Creamy. Coffee-soaked. Cocoa-crowned. A timeless Italian dessert
+                                </p>
+                                <div class="border-t border-gold/20 pt-4 mt-2">
+                                    <p class="text-xs font-semibold mb-3" style="font-family: 'Playfair Display', serif; color: #1a3d35; letter-spacing: 0.05em;">INGREDIENTS</p>
+                                    <div class="flex flex-wrap gap-2">
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Mascarpone Cheese</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Espresso Coffee</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Ladyfinger Biscuits</span>
+                                        <span class="text-xs px-3 py-1.5 rounded-full bg-forest/90 text-white shadow-sm" style="font-family: 'Inter', sans-serif;">Cocoa Powder</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Menu Download Modal -->
+                    <div
+                        id="menuModal"
+                        class="fixed inset-0 bg-black/70 flex items-center justify-center hidden p-4"
+                        style="z-index: 99999 !important;"
+                    >
+                        <div
+                            class="bg-white rounded-2xl shadow-2xl max-w-5xl w-full max-h-[90vh] overflow-hidden relative animate-fadeIn flex flex-col"
+                        >
+                            <!-- Header with Logo and Close Button -->
+                            <div class="flex justify-between items-center p-6 border-b border-gray-200 bg-white">
+                                <div class="flex items-center gap-4">
+                                    <img src="Dananas Logo.jpeg" alt="Danana's Logo" class="w-16 h-16 rounded-full border-2 border-forest">
+                                    <h2 class="text-3xl font-serif font-bold text-forest">
+                                        Danana's Menu
+                                    </h2>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <button
+                                        id="downloadPdfBtn"
+                                        class="bg-forest text-white hover:bg-forest-light px-6 py-2 rounded-full font-semibold text-sm shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center gap-2"
+                                    >
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                        </svg>
+                                        Download
+                                    </button>
+                                    <button
+                                        id="closeMenuModal"
+                                        class="text-3xl text-forest hover:text-gold font-bold transition-colors duration-200 leading-none"
+                                        aria-label="Close menu"
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Scrollable Menu Content (injected from #menu for a single source of truth) -->
+                            <div id="menuContent" class="flex-1 overflow-y-auto p-8 bg-white">
+                                <div class="text-center text-sm text-gray-500">Preparing menu preview…</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <style>
+                        /* Ensure modal is always on top */
+                        #menuModal {
+                            z-index: 99999 !important;
+                            position: fixed !important;
+                        }
+                        
+                        @keyframes fadeIn {
+                            from {
+                                opacity: 0;
+                                transform: scale(0.95);
+                            }
+                            to {
+                                opacity: 1;
+                                transform: scale(1);
+                            }
+                        }
+                        .animate-fadeIn {
+                            animation: fadeIn 0.3s ease;
+                        }
+                    </style>
+                </div>
+            </div>
+        </section>
+
+        <!-- Elegant Our Story Section (Redesigned) -->
+        <section
+            id="story"
+            class="relative py-32 bg-white overflow-hidden border-t border-gold/10"
+        >
+            <div
+                class="max-w-5xl mx-auto px-4 sm:px-8 lg:px-0 flex flex-col md:flex-row items-center gap-12 md:gap-20"
+            >
+                <!-- Daniyal's Photo -->
+                <div class="flex-shrink-0 flex flex-col items-center gap-4">
+                    <div
+                        class="w-64 h-80 rounded-3xl overflow-hidden shadow-2xl border-4 border-gold/30 bg-gray-100 flex items-center justify-center"
+                    >
+                        <img
+                            src="assets/images/Daniyals Photo.jpeg"
+                            alt="Daniyal's portrait"
+                            class="object-cover w-full h-full"
+                        />
+                    </div>
+                    <p class="text-lg font-serif text-forest/80 text-center italic">Meet Daniyal, lovingly known as Danana</p>
+                </div>
+                <!-- Story Content -->
+                <div class="flex-1">
+                    <h2
+                        class="text-5xl md:text-6xl font-serif font-bold text-forest mb-8 tracking-tight"
+                    >
+                        Our Story
+                    </h2>
+                    <div
+                        class="w-24 h-1 bg-gradient-to-r from-gold to-gold-light mb-8"
+                    ></div>
+                    <div
+                        class="space-y-8 text-lg md:text-xl text-gray-700 font-light leading-relaxed"
+                    >
+                        <p
+                            class="font-serif text-2xl md:text-3xl text-forest font-semibold mb-4"
+                        >
+                            Inspiration, Inclusion, and a Little Brother's Joy
+                        </p>
+                        <p>
+                            He doesn’t need words. He’s always said enough just by being.”
+                        </p>
+                        <p>
+                            Daniyal is my elder brother. He’s differently abled. He can’t speak much-but somehow, he’s always known how to say the most important things.
+                        </p>
+                        <p>
+                            He calls himself “Danana.” And every time we’d get him a burger, he’d light up and call it “Bala.” That became our ritual. A drive. A burger. His laughter in the backseat. The way he’d try to hold the fork, looking up at us like: “See, I’m doing it too.”
+                        </p>
+                        <p>
+                            That kind of joy? It’s rare. And real.
+                        </p>
+                        <p>
+                            So I built Danana’s as a tribute to that feeling. Not just for Daniyal, but for all of us. For the people who are often overlooked. For anyone who’s ever felt like they had to earn their space. This is a place where you don’t have to.
+                        </p>
+                        <p>
+                            Because sometimes the quietest people leave the loudest impact. Daniyal has shown me how to slow down, how to find joy in the smallest things, and how to be seen-without ever needing to explain yourself.
+                        </p>
+                        <p>
+                            In Pakistan, over 27 million people live with disabilities, but very few places are built for them. I wanted to change that, even if it’s just one place, one Bala at a time.
+                        </p>
+                        <p>
+                            He calls himself “Danana.” And every time we’d get him a burger, he’d light up and call it “Bala.” That became our ritual. A drive. A burger. His laughter in the backseat. The way he’d try to hold the fork, looking up at us like: “See, I’m doing it too.”
+                        </p>
+                        <p>
+                            This place is for him.
+                            This place is for you.
+                            This place is for all of us.
+                        </p>
+                        <p class="italic text-forest font-serif text-xl mt-8">
+                            Danana’s; where every Bala comes with a side of belonging.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-forest text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid md:grid-cols-4 gap-12 mb-12">
+                    <div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <img
+                                src="assets/images/Dananas Logo.jpeg"
+                                alt="Danana's Logo"
+                                class="w-16 h-16 rounded-full border-2 border-gold shadow-lg"
+                            />
+                            <div
+                                class="text-3xl font-bold text-gold"
+                                style="font-family: 'Playfair Display', serif; letter-spacing: 0.05em;"
+                            >
+                                DANANA'S
+                            </div>
+                        </div>
+                        <p class="opacity-90 font-light leading-relaxed mb-6">
+                            Established in Toronto. A place where every Bala comes
+                            with a side of belonging.
+                        </p>
+                        <div class="flex space-x-4">
+                            <a
+                                href="https://www.instagram.com/dananasburgerbar?igsh=bDQzOGkyZHJmbjVh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="bg-gold/20 p-4 rounded-full hover:bg-gold/30 transition-colors"
+                            >
+                                <svg class="w-6 h-6 text-gold" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gold mb-6 text-xl font-serif">
+                            Quick Links
+                        </h4>
+                        <ul class="space-y-3 opacity-90">
+                            <li>
+                                <a
+                                    href="#menu"
+                                    class="hover:text-gold transition-colors font-light"
+                                    >Our Menu</a
+                                >
+                            </li>
+                            <li>
+                                <a
+                                    href="#story"
+                                    class="hover:text-gold transition-colors font-light"
+                                    >Our Story</a
+                                >
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gold mb-6 text-xl font-serif">
+                            Contact
+                        </h4>
+                        <ul class="space-y-3 opacity-90 font-light">
+                            <li class="flex items-center gap-3">
+                                <span>📧</span>
+                                <a href="mailto:dananasburgerbar@gmail.com" class="hover:text-gold transition-colors">dananasburgerbar@gmail.com</a>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span>📍</span>
+                                <span>Toronto, ON</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gold mb-6 text-xl font-serif">
+                            Our Mission
+                        </h4>
+                        <p class="opacity-90 font-light leading-relaxed">
+                            Creating inclusive spaces where everyone belongs,
+                            one Bala at a time. Supporting accessibility
+                            initiatives and celebrating the beauty of
+                            differences.
+                        </p>
+                    </div>
+                </div>
+                <div class="text-center pt-12 border-t border-gold/20 mt-12">
+                    <div class="text-center">
+                        <p class="text-2xl font-serif font-bold text-gold mb-4">
+                            Built for Daniyal. Built for Everyone.
+                        </p>
+                        <p class="opacity-90 font-light">
+                            &copy; 2020 Danana's Burger Bar. All rights
+                            reserved. Made with ❤️ in Toronto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Lightbox for Polaroid Stories -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox-content">
+                <span class="close-lightbox" onclick="closeLightbox()"
+                    >&times;</span
+                >
+                <div id="lightbox-story"></div>
+            </div>
+        </div>
+
+        <!-- External JavaScript - Using ES6 Modules -->
+        <script type="module" src="js/main.js"></script>
+        <script>
+            (function () {
+                function c() {
+                    var b = a.contentDocument || a.contentWindow.document;
+                    if (b) {
+                        var d = b.createElement("script");
+                        d.innerHTML =
+                            "window.__CF$cv$params={r:'965ddd0406e8e246',t:'MTc1MzYzNzQxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+                        b.getElementsByTagName("head")[0].appendChild(d);
+                    }
+                }
+                if (document.body) {
+                    var a = document.createElement("iframe");
+                    a.height = 1;
+                    a.width = 1;
+                    a.style.position = "absolute";
+                    a.style.top = 0;
+                    a.style.left = 0;
+                    a.style.border = "none";
+                    a.style.visibility = "hidden";
+                    document.body.appendChild(a);
+                    if ("loading" !== document.readyState) c();
+                    else if (window.addEventListener)
+                        document.addEventListener("DOMContentLoaded", c);
+                    else {
+                        var e = document.onreadystatechange || function () {};
+                        document.onreadystatechange = function (b) {
+                            e(b);
+                            "loading" !== document.readyState &&
+                                ((document.onreadystatechange = e), c());
+                        };
+                    }
+                }
+            })();
+        </script>
+    </body>
+</html>

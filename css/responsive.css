@@ -1,0 +1,208 @@
+/* Danana's Burger Bar - Responsive Styles */
+
+/* Mobile positioning - arranged around vinyl in a circle */
+@media (max-width: 767px) {
+    .polaroid {
+        transform: scale(0.6) !important;
+    }
+
+    .polaroid-left-1 {
+        top: -80px;
+        left: -60px;
+        transform: rotate(-15deg) scale(0.6);
+    }
+    .polaroid-left-2 {
+        top: 50px;
+        left: -80px;
+        transform: rotate(-25deg) scale(0.6);
+    }
+    .polaroid-left-3 {
+        top: 180px;
+        left: -60px;
+        transform: rotate(15deg) scale(0.6);
+    }
+    .polaroid-left-4 {
+        top: 250px;
+        left: 20px;
+        transform: rotate(25deg) scale(0.6);
+    }
+    .polaroid-left-5 {
+        top: 250px;
+        left: 200px;
+        transform: rotate(-10deg) scale(0.6);
+    }
+
+    .polaroid-right-1 {
+        top: -80px;
+        right: -60px;
+        transform: rotate(15deg) scale(0.6);
+    }
+    .polaroid-right-2 {
+        top: 50px;
+        right: -80px;
+        transform: rotate(25deg) scale(0.6);
+    }
+    .polaroid-right-3 {
+        top: 180px;
+        right: -60px;
+        transform: rotate(-15deg) scale(0.6);
+    }
+    .polaroid-right-4 {
+        top: 250px;
+        right: 20px;
+        transform: rotate(-25deg) scale(0.6);
+    }
+    .polaroid-right-5 {
+        display: none;
+    }
+}
+
+/* Tablet positioning */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .polaroid-left-1 {
+        top: -30px;
+        left: -120px;
+        transform: rotate(-10deg) scale(0.8);
+    }
+    .polaroid-left-2 {
+        top: 30px;
+        left: -140px;
+        transform: rotate(-5deg) scale(0.8);
+    }
+    .polaroid-left-3 {
+        top: 90px;
+        left: -110px;
+        transform: rotate(-12deg) scale(0.8);
+    }
+    .polaroid-left-4 {
+        top: 150px;
+        left: -130px;
+        transform: rotate(8deg) scale(0.8);
+    }
+    .polaroid-left-5 {
+        top: 210px;
+        left: -100px;
+        transform: rotate(-6deg) scale(0.8);
+    }
+
+    .polaroid-right-1 {
+        top: -30px;
+        right: -120px;
+        transform: rotate(12deg) scale(0.8);
+    }
+    .polaroid-right-2 {
+        top: 30px;
+        right: -140px;
+        transform: rotate(6deg) scale(0.8);
+    }
+    .polaroid-right-3 {
+        top: 90px;
+        right: -110px;
+        transform: rotate(-10deg) scale(0.8);
+    }
+    .polaroid-right-4 {
+        top: 150px;
+        right: -130px;
+        transform: rotate(10deg) scale(0.8);
+    }
+    .polaroid-right-5 {
+        top: 210px;
+        right: -100px;
+        transform: rotate(-6deg) scale(0.8);
+    }
+}
+
+/* Desktop positioning */
+@media (min-width: 1024px) {
+    .polaroid-left-1 {
+        top: -40px;
+        left: -200px;
+        transform: rotate(-12deg);
+        z-index: 5;
+    }
+    .polaroid-left-2 {
+        top: 40px;
+        left: -230px;
+        transform: rotate(-6deg);
+        z-index: 4;
+    }
+    .polaroid-left-3 {
+        top: 120px;
+        left: -190px;
+        transform: rotate(-15deg);
+        z-index: 3;
+    }
+    .polaroid-left-4 {
+        top: 200px;
+        left: -220px;
+        transform: rotate(10deg);
+        z-index: 2;
+    }
+    .polaroid-left-5 {
+        top: 280px;
+        left: -180px;
+        transform: rotate(-8deg);
+        z-index: 1;
+    }
+
+    .polaroid-right-1 {
+        top: -40px;
+        right: -200px;
+        transform: rotate(15deg);
+        z-index: 5;
+    }
+    .polaroid-right-2 {
+        top: 40px;
+        right: -230px;
+        transform: rotate(8deg);
+        z-index: 4;
+    }
+    .polaroid-right-3 {
+        top: 120px;
+        right: -190px;
+        transform: rotate(-12deg);
+        z-index: 3;
+    }
+    .polaroid-right-4 {
+        top: 200px;
+        right: -220px;
+        transform: rotate(12deg);
+        z-index: 2;
+    }
+    .polaroid-right-5 {
+        top: 280px;
+        right: -180px;
+        transform: rotate(-8deg);
+        z-index: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .spotify-wheel {
+        width: 220px;
+        height: 220px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: clamp(2rem, 10vw, 3rem);
+        letter-spacing: 1px;
+    }
+
+    .sub-title {
+        font-size: clamp(1rem, 5vw, 1.5rem);
+        letter-spacing: 2px;
+    }
+
+    .establishment-text {
+        padding: 0.5rem 1rem;
+        font-size: clamp(0.6rem, 3vw, 0.9rem);
+        letter-spacing: 1px;
+    }
+
+    .spotify-wheel {
+        width: 180px;
+        height: 180px;
+    }
+}

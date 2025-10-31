@@ -1,0 +1,189 @@
+{
+  "burgers": [
+    {
+      "id": "danana-classic-bala",
+      "name": "Danana's Classic Bala",
+      "badge": "popular",
+      "badgeText": "Most Popular",
+      "description": "Handcrafted beef patty topped with rich aioli sauce, fresh lettuce, red beefsteak tomatoes & onions",
+      "price": "TBD",
+      "image": "assets/images/Classic Bala.jpeg",
+      "ingredients": [
+        "Handcrafted Beef Patty",
+        "Rich Aioli Sauce",
+        "Fresh Lettuce",
+        "Red Beefsteak Tomatoes",
+        "Onions"
+      ]
+    },
+    {
+      "id": "golden-deluxe",
+      "name": "Danana's Golden Deluxe",
+      "badge": "premium",
+      "badgeText": "Premium",
+      "description": "Butcher's cut Beef or Chicken Patty topped with Danana's Special Sauce, American Cheddar, Hickory smoked Mushrooms, Caramelized Onions, Potato Bun",
+      "price": "TBD",
+      "image": "assets/images/Golden Deluxe.jpeg",
+      "ingredients": [
+        "Butcher's Cut Beef/Chicken",
+        "Danana's Special Sauce",
+        "American Cheddar",
+        "Hickory Smoked Mushrooms",
+        "Caramelized Onions",
+        "Potato Bun"
+      ]
+    },
+    {
+      "id": "veggie-bala",
+      "name": "Danana's Veggie Bala",
+      "badge": "vegan",
+      "badgeText": "🌱 Vegan",
+      "description": "A wholesome plant-based delight featuring a grilled veggie patty topped with Danana's Special Vegan Sauce, hickory smoked mushrooms, caramelized onions, fresh lettuce, and house-cut tomatoes on a soft potato bun.",
+      "price": "TBD",
+      "image": "assets/images/Veggie Bala.jpeg",
+      "ingredients": [
+        "Veggie Patty",
+        "Danana's Special Vegan Sauce",
+        "Hickory Smoked Mushrooms",
+        "Caramelized Onions",
+        "Lettuce",
+        "Tomato",
+        "Potato Bun"
+      ]
+    },
+    {
+      "id": "laal-qila",
+      "name": "Laal Qila",
+      "badge": "spicy",
+      "badgeText": "🔥 Spicy",
+      "description": "A fiery fortress of flavor! Spicy Cheeto-coated chicken marinated with fresh herbs and secret spices, topped with hickory-smoked onions, mushrooms, and house-cut tomatoes for an unforgettable kick.",
+      "price": "TBD",
+      "image": "assets/images/Laal Qila.jpeg",
+      "ingredients": [
+        "Spicy Cheeto Coated Chicken",
+        "Fresh Herb Marinade",
+        "Hickory Smoked Onions",
+        "Hickory Smoked Mushrooms",
+        "House-Cut Tomatoes"
+      ]
+    },
+    {
+      "id": "niagara-crunch-bala",
+      "name": "Danana's 'Niagara Crunch' Bala",
+      "badge": "popular",
+      "badgeText": "Crispy",
+      "description": "A crispy indulgence inspired by the falls! Buttermilk-marinated chicken topped with caramelized onions, hickory-smoked mushrooms, Danana's Special Sauce, butter-head lettuce, and house-cut tomatoes for the perfect crunch in every bite.",
+      "price": "TBD",
+      "image": "assets/images/Danana's 'Niagara Crunch' Bala.jpeg",
+      "ingredients": [
+        "Buttermilk Marinated Chicken",
+        "Caramelized Onions",
+        "Hickory Smoked Mushrooms",
+        "Danana's Special Sauce",
+        "Butter-Head Lettuce",
+        "House-Cut Tomatoes"
+      ]
+    },
+    {
+      "id": "suzy",
+      "name": "Suzy",
+      "badge": "premium",
+      "badgeText": "Cheese Stuffed",
+      "description": "A bold creation bursting with attitude! Swiss and Kraft American Cheese stuffed inside a succulent beef patty, topped with our special spicy Cuban Jam, all wrapped in a soft Brioche Bun.",
+      "price": "TBD",
+      "image": "assets/images/Suzy.jpeg",
+      "ingredients": [
+        "Cheese-Stuffed Beef Patty",
+        "Swiss Cheese",
+        "Kraft American Cheese",
+        "Spicy Cuban Jam",
+        "Brioche Bun"
+      ]
+    },
+    {
+      "id": "danana-jhan-special",
+      "name": "Danana x Jhan Special",
+      "badge": "new",
+      "badgeText": "⭐ Collaboration",
+      "description": "The collaboration that started it all with a gourmet in house beef patty topped with caramelized onions, Jhan's Special Sauce, and crafted melted cheddar served in a warm German pretzel bun.",
+      "price": "TBD",
+      "image": "🥨",
+      "ingredients": [
+        "Gourmet In House Beef Patty",
+        "Jhan's Special Sauce",
+        "Melted Cheddar",
+        "Caramelized Onions",
+        "German Pretzel Bun"
+      ]
+    }
+  ],
+  "sides": [
+    {
+      "id": "bubu-bombs",
+      "name": "Bubu Bombs",
+      "badge": "popular",
+      "badgeText": "Flavour Explosion",
+      "description": "An explosion of flavour with Swiss jalapeno cream cheese stuffed in tender chicken breast wrapped in a golden fried breadcrumb crust for the perfect crunch.",
+      "price": "TBD",
+      "image": "💣",
+      "ingredients": [
+        "Herb Marinated Chicken",
+        "Swiss Jalapeno Cream Cheese Filling",
+        "Golden Fried Breadcrumb Coating"
+      ]
+    },
+    {
+      "id": "buff-aelo-bites",
+      "name": "Buff-Aelo Bites",
+      "badge": "spicy",
+      "badgeText": "Fiery Finish 🔥",
+      "description": "Featuring crispy chicken bites tossed in buttery spice blend and glazed with Franks Red Hot Sauce for that fiery finish.",
+      "price": "TBD",
+      "image": "🔥",
+      "ingredients": [
+        "Crispy Chicken Bites",
+        "Franks Red Hot Sauce",
+        "Buttery Spice Blend"
+      ]
+    }
+  ],
+  "beverages": [
+    {
+      "id": "cardamom-tea",
+      "name": "Cardamom Tea",
+      "badge": "signature",
+      "badgeText": "Aromatic",
+      "description": "Traditional cardamom-infused tea, served hot.",
+      "price": "TBD",
+      "image": "☕"
+    },
+    {
+      "id": "coke",
+      "name": "Coke",
+      "description": "Classic Coca-Cola, ice cold.",
+      "price": "TBD",
+      "image": "🥤"
+    },
+    {
+      "id": "sprite",
+      "name": "Sprite",
+      "description": "Crisp lemon-lime refreshment.",
+      "price": "TBD",
+      "image": "🥤"
+    },
+    {
+      "id": "iced-tea",
+      "name": "Iced Tea",
+      "description": "Refreshing iced tea, perfectly chilled.",
+      "price": "TBD",
+      "image": "🍹"
+    },
+    {
+      "id": "schweppes",
+      "name": "Schweppes",
+      "description": "Premium ginger ale.",
+      "price": "TBD",
+      "image": "🥤"
+    }
+  ]
+}
