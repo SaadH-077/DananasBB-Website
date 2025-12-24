@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danana's Story - Menu Card Back</title>
+    <link rel="stylesheet" href="menu-card-back.css">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu-card-back">
+            <!-- Content Wrapper -->
+            <div class="content-wrapper">
+                <!-- Left Side - Image -->
+                <div class="image-section">
+                    <div class="image-frame">
+                        <img src="Daniyals Photo.jpeg" alt="Meet Daniyal, lovingly known as Danana">
+                        <p class="image-caption">Meet Daniyal, lovingly known as Danana</p>
+                    </div>
+                    
+                    <div class="poetry-quote">
+                        <p class="poetry-line">"Jo bol na sakay, oh Rabb di zubaan.</p>
+                        <p class="poetry-translation">(Those who cannot speak, speak God's language.)</p>
+                        
+                        <p class="poetry-line">Unhā̃ de chehre te noor likhya,</p>
+                        <p class="poetry-line">Te saadi duniya di soch haar gayi.</p>
+                        <p class="poetry-translation">(Light rests upon their faces,<br>and our world's noise falls silent.)</p>
+                        
+                        <p class="poetry-line">Oh sanu sikhā gaye sukoon da maani,</p>
+                        <p class="poetry-line">Jithe pyaar da matlab sirf "hona" hai.</p>
+                        <p class="poetry-translation">(They taught us the meaning of peace,<br>that love means only to be.)"</p>
+                        
+                        <p class="poetry-author">~ Baba Bulleh Shah</p>
+                    </div>
+                </div>
+                
+                <!-- Right Side - Story -->
+                <div class="story-section">
+                    <h1 class="story-title">Our Story</h1>
+                    <h2 class="story-subtitle">Inspiration, Inclusion, and a Little Brother's Joy</h2>
+                    
+                    <div class="story-content">
+                        <p class="quote">"He doesn't need words. He's always said enough just by being."</p>
+                        
+                        <p>Daniyal is my elder brother. He's differently abled. He can't speak much-but somehow, he's always known how to say the most important things.</p>
+                        
+                        <p>He calls himself "Danana." And every time we'd get him a burger, he'd light up and call it "Bala." That became our ritual. A drive. A burger. His laughter in the backseat. The way he'd try to hold the fork, looking up at us like: "See, I'm doing it too."</p>
+                        
+                        <p>That kind of joy? It's rare. And real.</p>
+                        
+                        <p>So I built Danana's as a tribute to that feeling. Not just for Daniyal, but for all of us. For the people who are often overlooked. For anyone who's ever felt like they had to earn their space. This is a place where you don't have to.</p>
+                        
+                        <p>Because sometimes the quietest people leave the loudest impact. Daniyal has shown me how to slow down, how to find joy in the smallest things, and how to be seen-without ever needing to explain yourself.</p>
+                        
+                        <p>In Pakistan, over 27 million people live with disabilities, but very few places are built for them. I wanted to change that, even if it's just one place, one Bala at a time.</p>
+                        
+                        <p class="closing">This place is for him. This place is for you. This place is for all of us.</p>
+                        
+                        <p class="tagline">Danana's; where every Bala comes with a side of belonging.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button id="downloadBtn" class="download-btn">Download Menu Card Back as PNG</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        const button = this;
+        button.textContent = 'Generating image...';
+        button.disabled = true;
+        
+        const menuCard = document.querySelector('.menu-card-back');
+        
+        html2canvas(menuCard, {
+            scale: 3,
+            backgroundColor: '#0d1f0d',
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'dananas-menu-card-back.png';
+                link.href = url;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                button.textContent = 'Download Menu Card Back as PNG';
+                button.disabled = false;
+            }, 'image/png');
+        });
+    });
+    </script>
+</body>
+</html>

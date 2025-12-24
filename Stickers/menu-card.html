@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danana's Premium Menu Card</title>
+    <link rel="stylesheet" href="menu-card.css">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="menu-card">
+            <!-- Main Title -->
+            <h1 class="restaurant-name">DANANA'S</h1>
+            <p class="est-year">EST. 2020</p>
+            <p class="tagline">Where Every Bala Comes<br>with a Side of Belonging</p>
+            
+            <!-- Sections in Grid Layout -->
+            <div class="sections-wrapper">
+                <!-- Burgers Section -->
+                <div class="section burgers-section">
+                    <h2 class="section-title">BURGERS</h2>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">DANANA'S CLASSIC BALA</h3>
+                        <p class="item-description">Handcrafted beef patty topped with rich aioli sauce, fresh lettuce, red beefsteak tomatoes & onions.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">DANANA'S GOLDEN DELUXE</h3>
+                        <p class="item-description">Succulent beef or chicken patty of your choice, topped with Danana's Special Sauce, American cheddar, hickory-smoked mushrooms, caramelized onions, potato bun.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">NIAGARA CRUNCH</h3>
+                        <p class="item-description">Buttermilk-marinated chicken topped with caramelized onions & mushrooms. Danana's Special Sauce, buttar-head lettuce & house-cut tomatoes.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">LAAL QILA BALA</h3>
+                        <p class="item-description">Spicy Cheeto-coated chicken marinated with fresh herbs and spices, topped with hickory-smoked onions, mushrooms & house-cut tomatoes.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">SUZY</h3>
+                        <p class="item-description">Swiss & Kraft American cheese stuffed in a succulent beef patty, topped with a special spicy Cuban jam, wrapped in a brioche bun.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">DANANA'S VEGGIE BALA</h3>
+                        <p class="item-description">A wholesome plant-based delight featuring a grilled veggie patty topped with Danana's Special Vegan Sauce, hickory smoked mushrooms, caramelized onions, fresh lettuce, and house-cut tomatoes on a soft potato bun.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                </div>
+                
+                <!-- Appetizers Section -->
+                <div class="section appetizers-section">
+                    <h2 class="section-title">APPETIZERS</h2>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">BUBU BOMBS</h3>
+                        <p class="item-description">Swiss-jalapeno cream cheese wrapped in a layer of chicken breast, covered in golden fried breadcrumbs.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">BUFF-AELO BITES</h3>
+                        <p class="item-description">Buffalo chicken bites dipped in special spices, topped with Frank's RedHot Sauce.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+
+                    <h2 class="section-title">DESSERTS</h2>
+                    
+                    <div class="menu-item">
+                        <h3 class="item-name">TIRAMISU</h3>
+                        <p class="item-description">Creamy, Coffee-soaked. Cocoa-crowned. A timeless Italian dessert.</p>
+                        <p class="halal-label">(HALAL)</p>
+                    </div>
+                </div>
+                
+                <!-- Desserts Section -->
+                <div class="section desserts-section">
+                    <!-- <h2 class="section-title"></h2> -->
+                    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <button id="downloadBtn" class="download-btn">Download Menu Card as PNG</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        const button = this;
+        button.textContent = 'Generating image...';
+        button.disabled = true;
+        
+        const menuCard = document.querySelector('.menu-card');
+        
+        html2canvas(menuCard, {
+            scale: 3, // 3x resolution for high quality
+            backgroundColor: '#0d1f0d',
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            // Convert canvas to blob
+            canvas.toBlob(function(blob) {
+                // Create download link
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'dananas-menu-card.png';
+                link.href = url;
+                link.click();
+                
+                // Cleanup
+                URL.revokeObjectURL(url);
+                button.textContent = 'Download Menu Card as PNG';
+                button.disabled = false;
+            }, 'image/png');
+        });
+    });
+    </script>
+</body>
+</html>

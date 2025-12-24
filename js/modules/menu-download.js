@@ -23,7 +23,7 @@ export function initMenuDownload() {
             { name: "BUFF-AELO BITES", price: "$9", description: "Buffalo chicken bites dipped in special spices topped with Frank's Red Hot Sauce" }
         ],
         desserts: [
-            { name: "Tiramisu", price: "$8", description: "Creamy. Coffee-soaked. Cocoa-crowned. A timeless Italian dessert" }
+            { name: "Tiramisu", price: "$7 (S) / $12 (L)", description: "Creamy. Coffee-soaked. Cocoa-crowned. A timeless Italian dessert" }
         ]
     };
 
